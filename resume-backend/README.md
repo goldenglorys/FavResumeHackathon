@@ -1,2 +1,0 @@
-# FavResume
-SWE Resume Generator
