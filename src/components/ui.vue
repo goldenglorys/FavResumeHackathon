@@ -981,10 +981,6 @@
       },
 
       finalSubmission () {
-
-      },
-
-      thirdDetails2 () {
         let parsed = JSON.parse(this.jsonsample)
         console.log(JSON.parse(this.jsonsample))
 
@@ -1019,8 +1015,13 @@
         ],
         parsed.github_projects.items = this.personal_projects_data
         parsed.other_projects.items = this.other_projects_data
+        parsed.work_experience.items = this.work_data
+        parsed.involvement.organizations = this.involvements_data[0].organizations
+        parsed.education.schools = this.education_data
+        parsed.research_experience.items = this.research_data
         this.jsonsample = JSON.stringify(parsed)
         console.log(parsed)
+        this.getSample()
       }
     },
 
