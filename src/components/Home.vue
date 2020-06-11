@@ -2,7 +2,7 @@
 
     <div data-spy="scroll" data-target="#navbar" data-offset="30">
     
-        <div class="nav-menu fixed-top" style="background: #FF512F; background: -webkit-linear-gradient(to right, #DD2476, #FF512F); background: linear-gradient(to right, #DD2476, #FF512F);">
+        <div class="nav-menu fixed-top">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12" >
@@ -27,10 +27,9 @@
                 <h1>FavResume Generator</h1>
                 <p class="tagline">When its time to apply for that awsome tech job,we got you covered.
                 With just few lines of json we get you a professional resume in less than 30 seconds</p>
-
-                <p class="margin-bot">  
-                    <a href="http://127.0.0.1:3000/home" class="btn-lg btn-primary ">Generate Resume with JSON</a>
-                    <a href="/home" class="btn-lg btn-primary ">Generate Resume UI</a>
+                <p class="margin-bot mr-2">  
+                    <a href="https://favresume.herokuapp.com/home" class="btn-lg btn-primary mr-2">Generate with JSON</a>
+                    <router-link to="/ui" class="btn-lg btn-primary ml-2">Generate with UI</router-link>
                 </p>
             </div>
             <div class="img-holder mt-3"><img :src="require('../assets/images/x3.png')" width="40%" alt="phone" ></div>
@@ -42,8 +41,233 @@
             </div>
         </div>
 
-    </div>
+        <div class="section light-bg" id="features">
+            <div class="container">
+                <div class="section-title">
+                    <small>HIGHLIGHTS</small>
+                    <h3>Features you love</h3>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="card features">
+                            <div class="card-body">
+                                <div class="media">
+                                    <span class="ti-face-smile gradient-fill ti-3x mr-3"></span>
+                                    <div class="media-body">
+                                        <h4 class="card-title">Simple</h4>
+                                        <p class="card-text">Javascript object notation is one of the simplest data-structure of all time and its one of the core feature of our generator,which makes our app simple and easy to edit</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="card features">
+                            <div class="card-body">
+                                <div class="media">
+                                    <span class="ti-lock gradient-fill ti-3x mr-3"></span>
+                                    <div class="media-body">
+                                        <h4 class="card-title">Secure</h4>
+                                        <p class="card-text">With state of the art security,we guarantee that your data is transfered in a secured network and we dont store or watch you generate your resume,you are anonymous with us</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-6">
+                        <div class="box-icon"><span class="ti-mobile gradient-fill ti-3x"></span></div>
+                        <h2>Discover our App</h2>
+                        <p class="mb-4">Learn how to use our generator </p>
+                        <a href="/learn" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
+                <div class="perspective-phone">
+                    <img :src="require('../assets/images/x8.png')" width="50%" alt="perspective phone" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="section light-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 d-flex align-items-center">
+                        <ul class="list-unstyled ui-steps">
+                            <li class="media">
+                                <div class="circle-icon mr-4">1</div>
+                                <div class="media-body">
+                                    <h5>Edit JSON</h5>
+                                </div>
+                            </li>
+                            <li class="media my-4">
+                                <div class="circle-icon mr-4">2</div>
+                                <div class="media-body">
+                                    <h5>Generate and download</h5>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <div class="circle-icon mr-4">3</div>
+                                <div class="media-body">
+                                    <h5>Have a wonderful career</h5>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <img :src="require('../assets/images/iphonex.png')" alt="iphone" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="section-title">
+                    <small>TESTIMONIALS</small>
+                    <h3>Our amazing commuinty</h3>
+                </div>
+                <div class="testimonials owl-carousel">
+                    <div class="testimonials-single">
+                        <img src="http://res.cloudinary.com/dus4sijdt/image/upload/v1508670110/djdkzmddmge1tq2hg09i.png" alt="client" class="client-img">
+                        <blockquote class="blockquote">Its just amazing ,got my resume in less than 25seconds</blockquote>
+                        <h5 class="mt-4 mb-2">Collins Ifunanya</h5>
+                        <p class="text-primary">Nigeria</p>
+                    </div>
+                    <div class="testimonials-single">
+                        <img src="http://res.cloudinary.com/dus4sijdt/image/upload/v1508670110/djdkzmddmge1tq2hg09i.png" alt="client" class="client-img">
+                        <blockquote class="blockquote">FavResume made the journey into tech industry easy</blockquote>
+                        <h5 class="mt-4 mb-2">Josh Oji</h5>
+                        <p class="text-primary">Nigeria</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section light-bg" id="gallery">
+            <div class="container">
+                <div class="section-title">
+                    <small>GALLERY</small>
+                    <h3>App Screenshots</h3>
+                </div>
+                <div class="img-gallery owl-carousel owl-theme">
+                    <img :src="require('../assets/images/x3.png')" alt="image">
+                    <img :src="require('../assets/images/x4.png')" alt="image">
+                    <img :src="require('../assets/images/x5.png')" alt="image">
+                    <img :src="require('../assets/images/x6.png')" alt="image">
+                    <img :src="require('../assets/images/x7.png')" alt="image">
+                </div>
+            </div>
+        </div>
+
+        <div class="section light-bg">
+            <div class="container">
+                <div class="section-title">
+                    <small>XTRA</small>
+                    <h3>More from Us</h3>
+                </div>
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#communication">FavReaders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#schedule">FavCode54</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#messages">FireBrain</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#livechat">Host9ja</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="communication">
+                        <div class="d-flex flex-column flex-lg-row">
+                            <img :src="require('../assets/images/graphic.png')" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                            <div>
+
+                                <h2>FavReaders</h2>
+                                <p class="lead">The more that you read,the more things you will know.The more you learn,the more places you'll go. </p>
+
+                                <p>FavReaders is a community of developers that share the same goal of one book per day.Its an enriching section,everyone get to read same book per day and share opinion on the morals of the book.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="schedule">
+                        <div class="d-flex flex-column flex-lg-row">
+                            <div>
+                                <h2>FavCode54</h2>
+                                <p class="lead">Everyone can code!</p>
+
+                                <p>We have a mission to develop the African continent by making technology accessible to everyone. We teach, we mentor, we develop!
+                                Tech's taking over Africa.it's a revolution.</p>
+                            </div>
+                            <img :src="require('../assets/images/graphic.png')" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="messages">
+                        <div class="d-flex flex-column flex-lg-row">
+                            <img :src="require('../assets/images/graphic.png')" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                            <div>
+                                <h2>FavBrain</h2>
+                                <p class="lead">Find that quality hand for the job!</p>
+                                <p>We bring together capable hands across Africa that are fit to take on any project ..</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="livechat">
+                        <div class="d-flex flex-column flex-lg-row">
+                            <div>
+                                <h2>Host9ja</h2>
+                                <p class="lead"> Hosting made easier! </p>
+                                <p>We provide business  the perfect domain with strong ,secured and reliable hosting services.</p>
+                            </div>
+                            <img :src="require('../assets/images/graphic.png')" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="light-bg py-5" id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                        <p class="mb-2"> <span class="ti-location-pin mr-2"></span> San Francisco</p>
+                        <div class=" d-block d-sm-inline-block">
+                            <p class="mb-2">
+                                <span class="ti-email mr-2"></span> <a class="mr-4" href="hi@favcode54.org">hi@favcode54.org</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="social-icons">
+                            <a href="#"><span class="ti-facebook"></span></a>
+                            <a href="#"><span class="ti-twitter-alt"></span></a>
+                            <a href="#"><span class="ti-instagram"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="my-5 text-center">
+            <!-- Copyright removal is not prohibited! -->
+            <p class="mb-2"><small>COPYRIGHT © 2018. ALL RIGHTS RESERVED. FavResume BY <a href="https://favcode54.org">favcode54</a></small></p>
+            <small>
+                <a href="#" class="m-2">PRESS</a>
+                <a href="#" class="m-2">TERMS</a>
+                <a href="#" class="m-2">PRIVACY</a>
+            </small>
+        </footer>
+
+
+    </div>
 </template>
 
   
