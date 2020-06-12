@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <v-app id="inspire">
+     <v-parallax height="100%" dark src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
       <v-container>
         <v-stepper v-model="count_stepper" vertical>
           <v-stepper-step :complete="count_stepper > 1" step="1">
@@ -10,12 +11,14 @@
           <v-stepper-content step="1">
             <v-card color="lighten-1" class="mb-12">
             <v-subheader><b>Identity</b></v-subheader>
+            <v-form v-model="isValid">
               <v-col cols="12" sm="12" md="12">
                 <v-text-field
                   v-model="firstname"
                   label="Firstname"
                   required
                   clearable
+                  :rules="[v => !!v || 'Firstname is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="12">
@@ -24,6 +27,7 @@
                   label="Lastname"
                   required
                   clearable
+                  :rules="[v => !!v || 'Lasttname is required']"
                 ></v-text-field>
               </v-col>
 
@@ -35,6 +39,7 @@
                 required
                 prepend-icon="email"
                 clearable
+                :rules="[v => !!v || 'Email is required']"
               ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="12">
@@ -44,6 +49,7 @@
                   required
                   prepend-icon="phone"
                   clearable
+                  :rules="[v => !!v || 'Phone is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="12">
@@ -53,6 +59,7 @@
                   required
                   prepend-icon="language"
                   clearable
+                  :rules="[v => !!v || 'Website is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="12">
@@ -60,8 +67,9 @@
                   v-model="linkedin"
                   label="LinkedIn Link"
                   required
-                  prepend-icon="web"
+                  prepend-icon="language"
                   clearable
+                  :rules="[v => !!v || 'LinkedIn Link is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="12">
@@ -69,12 +77,14 @@
                   v-model="github"
                   label="Github Link"
                   required
-                  prepend-icon="web"
+                  prepend-icon="language"
                   clearable
+                  :rules="[v => !!v || 'Github Link is required']"
                 ></v-text-field>
               </v-col>
+              </v-form>
             </v-card>
-          <v-btn text color="success" @click="firstDetails">Next</v-btn>
+          <v-btn :disabled="!isValid" text color="success" @click="firstDetails">Next</v-btn>
         </v-stepper-content>
       
           <v-stepper-step :complete="count_stepper > 2" step="2" colo="success">Your Skills</v-stepper-step>
@@ -82,6 +92,7 @@
           <v-stepper-content step="2">
             <v-card color="lighten-1" class="mb-12">
               <v-subheader><b>Programming Languages</b></v-subheader>
+              <v-form v-model="isValid2">
               <v-col cols="12">
                 <v-combobox
                   :items="programming_items"
@@ -91,6 +102,7 @@
                   required
                   clearable
                   v-model="programmingItems"
+                  :rules="[v => !!v || 'Programming Languages is required']"
                 ></v-combobox>
               </v-col>
 
@@ -104,6 +116,7 @@
                   required
                   clearable
                   v-model="webFrameworksItems"
+                  :rules="[v => !!v || 'Web Frameworks is required']"
                 ></v-combobox>
               </v-col>
 
@@ -117,6 +130,7 @@
                   required
                   clearable
                   v-model="databasesItems"
+                  :rules="[v => !!v || 'Databases is required']"
                 ></v-combobox>
               </v-col>
 
@@ -130,6 +144,7 @@
                   required
                   clearable
                   v-model="toolsItems"
+                  :rules="[v => !!v || 'Tools is required']"
                 ></v-combobox>
               </v-col>
 
@@ -143,12 +158,13 @@
                   required
                   clearable
                   v-model="interestItems"
+                  :rules="[v => !!v || 'Interests is required']"
                 ></v-combobox>
               </v-col>
-
+              </v-form>
             </v-card>
             <v-btn text color="warning" @click="count_stepper = 1">Prev</v-btn>
-            <v-btn text color="success" @click="secondDetails">Next</v-btn>
+            <v-btn :disabled="!isValid2" text color="success" @click="secondDetails">Next</v-btn>
           </v-stepper-content>
       
           <v-stepper-step :complete="count_stepper > 3" step="3">Projects</v-stepper-step>
@@ -165,6 +181,7 @@
               ></v-data-table>
               </v-col>
               </v-row>
+              <v-form v-model="isValidPersonalProject">
               <v-row>
               <v-col cols="12" sm="12" md="3">
                 <v-text-field
@@ -172,6 +189,7 @@
                   label="Project Name"
                   required
                   clearable
+                  :rules="[v => !!v || 'Project Name is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="3">
@@ -180,6 +198,7 @@
                   label="Project Tagline"
                   required
                   clearable
+                  :rules="[v => !!v || 'Project Tagline is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="3">
@@ -188,6 +207,7 @@
                   label="Project Link"
                   required
                   clearable
+                  :rules="[v => !!v || 'Project Link is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="3">
@@ -196,11 +216,13 @@
                   label="Project Description"
                   required
                   clearable
+                  :rules="[v => !!v || 'Project Description is required']"
                 ></v-text-field>
               </v-col>
               </v-row>
               <v-row>
               <v-col cols="9">
+              <v-subheader><b>Technology Used</b></v-subheader>
                 <v-combobox
                   :items="project_tech_used"
                   label="Select multiple or create and hit enter"
@@ -209,56 +231,63 @@
                   required
                   clearable
                   v-model="pTechUsed"
+                  :rules="[v => !!v || 'Technology Used is required']"
                 ></v-combobox>
               </v-col>
-              <v-btn cols="3" rounded="rounded" small="small" color="primary" @click="addPersonalProject" >Add</v-btn>
+              <v-btn :disabled="!isValidPersonalProject" cols="3" rounded="rounded" small="small" color="primary" @click="addPersonalProject" >Add</v-btn>
               </v-row>
+              </v-form>
               <v-subheader><b>Other Projects</b></v-subheader>
               <v-row>
-                <v-row>
-                <v-col cols="12" sm="12" md="12">
-                <v-data-table
-                  :headers="other_projects_headers"
-                  :items="other_projects_data"
-                  class="elevation-1"
-                ></v-data-table>
-                </v-col>
-                </v-row>
-                <v-row>
-                <br>
-                <v-col cols="12" sm="12" md="3">
-                  <v-text-field
-                    v-model="pHeadline"
-                    label="Project Headline"
-                    required
-                    clearable
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="12" md="3">
-                  <v-text-field
-                    v-model="pPoints"
-                    label="Project Points"
-                    required
-                    clearable
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                  <v-combobox
-                    :items="project_tech_used2"
-                    label="Select multiple or create and hit enter"
-                    multiple
-                    chips
-                    required
-                    clearable
-                    v-model="pTechUsed2"
-                  ></v-combobox>
-                </v-col>
-                <v-btn cols="3" rounded="rounded" small="small" color="primary" @click="addOtherProject" >Add</v-btn>
+              <v-col cols="12" sm="12" md="12">
+              <v-data-table
+                :headers="other_projects_headers"
+                :items="other_projects_data"
+                class="elevation-1"
+              ></v-data-table>
+              </v-col>
               </v-row>
+              <v-form v-model="isValidOtherProject">
+              <v-row>
+              <v-col cols="12" sm="12" md="4">
+                <v-text-field
+                  v-model="pHeadline"
+                  label="Project Headline"
+                  required
+                  clearable
+                  :rules="[v => !!v || 'Project Headline is required']"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="12" md="4">
+                <v-text-field
+                  v-model="pPoints"
+                  label="Project Points"
+                  required
+                  clearable
+                  :rules="[v => !!v || 'Project Point is required']"
+                ></v-text-field>
+              </v-col>
               </v-row>
+              <v-row>
+              <v-col cols="9">
+              <v-subheader><b>Technology Used</b></v-subheader>
+                <v-combobox
+                  :items="project_tech_used2"
+                  label="Select multiple or create and hit enter"
+                  multiple
+                  chips
+                  required
+                  clearable
+                  v-model="pTechUsed2"
+                  :rules="[v => !!v || 'Technology Used is required']"
+                ></v-combobox>
+              </v-col>
+              <v-btn :disabled="!isValidOtherProject" cols="3" rounded="rounded" small="small" color="primary" @click="addOtherProject" >Add</v-btn>
+              </v-row>
+              </v-form>
             </v-card>
             <v-btn color="warning" @click="count_stepper = 2" text>Prev</v-btn>
-            <v-btn text color="success" @click="thirdDetails">Next</v-btn>
+            <v-btn text :disabled="projects" color="success" @click="thirdDetails">Next</v-btn>
           </v-stepper-content>
 
           <v-stepper-step :complete="count_stepper > 4" step="4">Work Experiences</v-stepper-step>
@@ -274,6 +303,7 @@
               ></v-data-table>
               </v-col>
               </v-row>
+              <v-form v-model="isValidWorkExperience">
               <v-row>
               <v-col cols="12" sm="12" md="4">
                 <v-text-field
@@ -281,6 +311,7 @@
                   label="Work Title"
                   required
                   clearable
+                  :rules="[v => !!v || 'Work Title is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="4">
@@ -289,6 +320,7 @@
                   label="Organisation"
                   required
                   clearable
+                  :rules="[v => !!v || 'Organisation is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="4">
@@ -297,37 +329,81 @@
                   label="Location"
                   required
                   clearable
+                  :rules="[v => !!v || 'Location is required']"
                 ></v-text-field>
               </v-col>
               </v-row>
               <v-row>
-              <v-col cols="12" sm="12" md="4">
-                <v-text-field
-                  v-model="workFrom"
-                  label="Work From"
-                  required
-                  clearable
-                ></v-text-field>
+              <v-col cols="12" sm="12" md="3">
+              <v-menu
+                v-model="menu2"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="workFrom"
+                label="Work From"
+                prepend-icon="event"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                required
+                clearable
+                :rules="[v => !!v || 'From is required']"
+              ></v-text-field>
+              </template>
+              <v-date-picker type="month" header-color="success" color="warning lighten-1" v-model="workFrom" @input="menu2 = false"></v-date-picker>
+              </v-menu>
               </v-col>
-              <v-col cols="12" sm="12" md="4">
-                <v-text-field
-                  v-model="workTo"
-                  label="Work To"
-                  required
-                  clearable
-                ></v-text-field>
+              <v-col cols="12" sm="12" md="3">
+              <v-checkbox
+                v-model="presntlyWorking"
+                label="Presently There"
+                @change="!presntlyWorking; workTo = 'Present'"
+              ></v-checkbox>
               </v-col>
-              <v-col cols="12" sm="12" md="4">
+              <v-col cols="12" sm="12" md="3" v-if="!presntlyWorking">
+              <v-menu
+                v-model="menu3"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="workTo"
+                label="Work To"
+                prepend-icon="event"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                required
+                clearable
+                :rules="[v => !!v || 'To is required']"
+              ></v-text-field>
+              </template>
+              <v-date-picker type="month" header-color="success" color="warning lighten-1" v-model="workTo" @input="menu3 = false"></v-date-picker>
+              </v-menu>
+              </v-col>
+              <v-col cols="12" sm="12" md="3">
                 <v-text-field
                   v-model="workDetails"
                   label="Work Details"
                   required
                   clearable
+                  :rules="[v => !!v || 'Work Details is required']"
                 ></v-text-field>
               </v-col>
               </v-row>
               <v-row>
               <v-col cols="9">
+              <v-subheader><b>Technology Used</b></v-subheader>
                 <v-combobox
                   :items="work_tech_used"
                   label="Select multiple or create and hit enter"
@@ -336,19 +412,21 @@
                   required
                   clearable
                   v-model="workTechUsed"
+                  :rules="[v => !!v || 'Technology Used is required']"
                 ></v-combobox>
               </v-col>
-              <v-btn cols="3" rounded="rounded" small="small" color="primary" @click="addWorkExperience" >Add</v-btn>
+              <v-btn cols="3" :disabled="!isValidWorkExperience" rounded="rounded" small="small" color="primary" @click="addWorkExperience" >Add</v-btn>
               </v-row>
+              </v-form>
             </v-card>
             <v-btn color="warning" @click="count_stepper = 3" text>Prev</v-btn>
-            <v-btn text color="success" @click="fourthDetails">Next</v-btn>
+            <v-btn text :disabled="works" color="success" @click="fourthDetails">Next</v-btn>
           </v-stepper-content>
 
           <v-stepper-step step="5" :complete="count_stepper > 5">Your Involvments Details</v-stepper-step>
           <v-stepper-content step="5">
             <v-card color="lighten-1" class="mb-12">
-              <v-subheader><b>Extracircullar you're involved in</b></v-subheader>
+              <v-subheader><b>Extracircullars you're involved in</b></v-subheader>
               <v-row>
               <v-col cols="12" sm="12" md="12">
               <v-data-table
@@ -358,20 +436,23 @@
               ></v-data-table>
               </v-col>
               </v-row>
+              <v-form v-model="isValidInvolvement">
               <v-row>
-              <v-col cols="12" sm="12" md="12">
+              <v-col cols="9">
                 <v-text-field
                   v-model="involvement"
-                  label="Details"
+                  label="Involvement Details"
                   required
                   clearable
+                  :rules="[v => !!v || 'Involvement Details is required']"
                 ></v-text-field>
               </v-col>
-              <v-btn cols="3" rounded="rounded" small="small" color="primary" @click="addInvolvement" >Add</v-btn>
+              <v-btn cols="3" :disabled="!isValidInvolvement" rounded="rounded" small="small" color="primary" @click="addInvolvement" >Add</v-btn>
               </v-row>
+              </v-form>
             </v-card>
             <v-btn color="warning" @click="count_stepper = 4" text>Prev</v-btn>
-            <v-btn text color="success" @click="fifthDetails">Next</v-btn>
+            <v-btn text :disabled="invs" color="success" @click="fifthDetails">Next</v-btn>
           </v-stepper-content>
 
           <v-stepper-step step="6" :complete="count_stepper > 6">Your Education Details</v-stepper-step>
@@ -387,6 +468,7 @@
               ></v-data-table>
               </v-col>
               </v-row>
+              <v-form v-model="isValidEducation">
               <v-row>
               <v-col cols="12" sm="12" md="4">
                 <v-text-field
@@ -394,6 +476,7 @@
                   label="Degree"
                   required
                   clearable
+                  :rules="[v => !!v || 'Degree is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="4">
@@ -402,6 +485,7 @@
                   label="Major"
                   required
                   clearable
+                  :rules="[v => !!v || 'Major is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="4">
@@ -410,23 +494,26 @@
                   label="Institution"
                   required
                   clearable
+                  :rules="[v => !!v || 'Institution is required']"
                 ></v-text-field>
               </v-col>
               </v-row>
               <v-row>
-              <v-col cols="12" sm="12" md="6">
+              <v-col cols="9">
                 <v-text-field
                   v-model="gradYear"
                   label="Graduation Year"
                   required
                   clearable
+                  :rules="[v => !!v || 'Graduation Year is required']"
                 ></v-text-field>
               </v-col>
-              <v-btn cols="3" rounded="rounded" small="small" color="primary" @click="addEducation" >Add</v-btn>
+              <v-btn cols="3" :disabled="!isValidEducation" rounded="rounded" small="small" color="primary" @click="addEducation" >Add</v-btn>
               </v-row>
+              </v-form>
             </v-card>
             <v-btn color="warning" @click="count_stepper = 5" text>Prev</v-btn>
-            <v-btn text color="success" @click="sixthDetails">Next</v-btn>
+            <v-btn text :disabled="edus" color="success" @click="sixthDetails">Next</v-btn>
           </v-stepper-content>
 
           <v-stepper-step step="7" :complete="count_stepper > 7">Research Experiences</v-stepper-step>
@@ -442,6 +529,7 @@
               ></v-data-table>
               </v-col>
               </v-row>
+              <v-form v-model="isValidResearch">
               <v-row>
               <v-col cols="12" sm="12" md="6">
                 <v-text-field
@@ -449,6 +537,7 @@
                   label="Research Title"
                   required
                   clearable
+                  :rules="[v => !!v || 'Research Title is required']"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="6">
@@ -457,25 +546,67 @@
                   label="Research Organisation"
                   required
                   clearable
+                  :rules="[v => !!v || 'Research Organisation is required']"
                 ></v-text-field>
               </v-col>
               </v-row>
               <v-row>
-              <v-col cols="12" sm="12" md="6">
-                <v-text-field
-                  v-model="researchFrom"
-                  label="From"
-                  required
-                  clearable
-                ></v-text-field>
+              <v-col cols="12" sm="12" md="4">
+              <v-menu
+                v-model="menu4"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="researchFrom"
+                label="From"
+                required
+                clearable
+                :rules="[v => !!v || 'From is required']"
+                prepend-icon="event"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+              </template>
+              <v-date-picker type="month" header-color="success" color="warning lighten-1" v-model="researchFrom" @input="menu4 = false"></v-date-picker>
+              </v-menu>
               </v-col>
-              <v-col cols="12" sm="12" md="6">
-                <v-text-field
-                  v-model="researchTo"
-                  label="Research To"
-                  required
-                  clearable
-                ></v-text-field>
+              <v-col cols="12" sm="12" md="4">
+              <v-checkbox
+                v-model="presntlyResearching"
+                label="Presently There"
+                @change="!presntlyResearching; researchTo = 'Present'"
+              ></v-checkbox>
+              </v-col>
+              <v-col cols="12" sm="12" md="4" v-if="!presntlyResearching">
+              <v-menu
+                v-model="menu5"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="researchTo"
+                label="Research To"
+                prepend-icon="event"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                required
+                clearable
+                :rules="[v => !!v || 'To is required']"
+              ></v-text-field>
+              </template>
+              <v-date-picker type="month" header-color="success" color="warning lighten-1" v-model="researchTo" @input="menu5 = false"></v-date-picker>
+              </v-menu>
               </v-col>
               </v-row>
               <v-row>
@@ -488,13 +619,15 @@
                   required
                   clearable
                   v-model="researchPoint"
+                  :rules="[v => !!v || 'Research Points is required']"
                 ></v-combobox>
               </v-col>
-              <v-btn cols="3" rounded="rounded" small="small" color="primary" @click="addResearch" >Add</v-btn>
+              <v-btn :disabled="!isValidResearch" cols="3" rounded="rounded" small="small" color="primary" @click="addResearch" >Add</v-btn>
               </v-row>
+              </v-form>
             </v-card>
             <v-btn color="warning" @click="count_stepper = 6" text>Prev</v-btn>
-            <v-btn text color="success" @click="finalSubmission">Submit & Generate</v-btn>
+            <v-btn text :disabled="researchs" color="success" @click="finalSubmission">{{ submitBtn }}</v-btn>
           </v-stepper-content>
         </v-stepper>  
         <v-speed-dial
@@ -538,6 +671,7 @@
       </v-tooltip>
     </v-speed-dial> 
       </v-container>
+      </v-parallax>
     </v-app>
     </div>
 </template>
@@ -729,7 +863,24 @@
               }
           }
       `,
-
+        on: null,
+        attrs: null,
+        isValid: true,
+        isValid2: true,
+        isValidPersonalProject: true,
+        isValidOtherProject: true,
+        isValidWorkExperience: true,
+        isValidEducation: true,
+        isValidResearch: true,
+        isValidInvolvement: true,
+        presntlyWorking: false,
+        presntlyResearching: false,
+        projects: true,
+        works: true,
+        invs: true,
+        edus: true,
+        researchs: true,
+        submitBtn: 'Submit & Generate',
         count_stepper: 1,
         payload: null,
         firstname: null,
@@ -755,7 +906,11 @@
         workTitle: null,
         workOrganisation: null,
         workLocation: null,
-        workFrom: null,
+        workFrom: new Date().toISOString().substr(0, 10),
+        menu2: false,
+        menu3: false,
+        menu4: false,
+        menu5: false,
         workTo: null,
         workDetails: null,
         workTechUsed: null,
@@ -766,7 +921,7 @@
         gradYear: null,
         researchTitle: null,
         researchOrganisation: null,
-        researchFrom: null,
+        researchFrom: new Date().toISOString().substr(0, 10),
         researchTo: null,
         researchPoint: null,
 
@@ -784,6 +939,7 @@
         rounded:true,
         small:true,
 
+
         select: [],
         programming_items: [
           'Java',
@@ -795,7 +951,7 @@
           'Objective-C'
         ],
         web_framework_items: [
-          'Bootstarp',
+          'Bootstrap',
           'Materialize',
           'Ruby on Rails'
         ],
@@ -824,9 +980,23 @@
           "Swift",
           "Xcode"
         ],
-        project_tech_used2: [ ],
-        work_tech_used: [ ],
-        research_point: [ ],
+        project_tech_used2: [ 
+          "HTML5",
+          "CSS3",
+          "PHP",
+          "MySQL"
+        ],
+        work_tech_used: [
+           "Xcode",
+            "Swift",
+            "Java",
+            "HTML5",
+            "CSS3",
+            "PHP"
+        ],
+        research_point: [ 
+          "Give Point of Resarch"
+        ],
         personal_projects_headers: [
           { text: 'Project Name', value: 'project_name' },
           { text: 'Tagline', value: 'tagline' },
@@ -891,7 +1061,7 @@
         fetch(baseURL, options)
           .then((response) => response.json())
           .then((response) => {
-            window.document.location.href = `https://favresume.herokuapp.com/${response.filename}`
+            window.open(window.document.location.href = `https://favresume.herokuapp.com/${response.filename}`, '_blank')
           })
           .catch((err) => console.log(err));
       },
@@ -906,6 +1076,14 @@
             }
         }
         this.personal_projects_data = [ ...this.personal_projects_data, obj ]
+        this.pName = ''
+        this.pTagline = ''
+        this.pLink = ''
+        this.pDescription = ''
+        this.pTechUsed = ''
+        if(this.personal_projects_data.length > 0 && this.other_projects_data.length > 0) {
+          this.projects = false 
+        }
       },
 
       addOtherProject () {
@@ -917,6 +1095,12 @@
           }
         }
         this.other_projects_data = [ ...this.other_projects_data, obj ]
+        this.pHeadline = ''
+        this.pPoints = ''
+        this.pTechUsed2 = ''
+        if(this.personal_projects_data.length > 0 && this.other_projects_data.length > 0) {
+          this.projects = false 
+        }
       },
 
       addWorkExperience () {
@@ -932,10 +1116,25 @@
           }
         }
         this.work_data = [ ...this.work_data, obj ]
+        this.workTitle = ''
+        this.workOrganisation = ''
+        this.workLocation = ''
+        this.workFrom = ''
+        this.workTo = ''
+        this.workDetails = ''
+        this.workTechUsed = ''
+        this.presntlyWorking = false
+        if(this.work_data.length > 0) {
+          this.works = false
+        }
       },
 
       addInvolvement () {
         this.involvements_data[0].organizations.push(this.involvement)
+        this.involvement = ''
+        if(this.involvements_data[0].organizations.length > 0) {
+          this.invs = false
+        }
       },
 
       addEducation () {
@@ -946,6 +1145,13 @@
           "graduation_year": this.gradYear
         }
         this.education_data = [ ...this.education_data, obj ]
+        this.degree = ''
+        this.major = ''
+        this.institution = ''
+        this.gradYear = ''
+        if(this.education_data.length > 0) {
+          this.edus = false
+        }
       },
 
       addResearch () {
@@ -957,13 +1163,20 @@
           "points": [ this.researchPoint ]
         }
         this.research_data = [ ...this.research_data, obj ]
+        this.researchTitle = ''
+        this.researchOrganisation = ''
+        this.researchFrom = ''
+        this.researchTo = ''
+        this.researchPoint = ''
+        if(this.research_data.length > 0) {
+          this.researchs = false
+        }
       },
 
 
       firstDetails () {
         this.count_stepper = 2;
       },
-
       secondDetails () {
         this.count_stepper = 3
       },
@@ -981,6 +1194,9 @@
       },
 
       finalSubmission () {
+        this.submitBtn = 'Generating...'
+        this.researchs = true
+
         let parsed = JSON.parse(this.jsonsample)
         console.log(JSON.parse(this.jsonsample))
 
