@@ -627,6 +627,24 @@
               </v-form>
             </v-card>
             <v-btn color="warning" @click="count_stepper = 6" text>Prev</v-btn>
+            <div class="text-center ma-2">
+            <v-snackbar
+              v-model="snackbar"
+            >
+              {{ snackText }}
+
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                  color="pink"
+                  text
+                  v-bind="attrs"
+                  @click="snackbar = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
+            </div>
             <v-btn text :disabled="researchs" color="success" @click="finalSubmission">{{ submitBtn }}</v-btn>
           </v-stepper-content>
         </v-stepper>  
@@ -863,6 +881,9 @@
               }
           }
       `,
+      
+        snackbar: false,
+        snackText: 'An error occur, try again!',
         on: null,
         attrs: null,
         isValid: true,
@@ -1063,13 +1084,19 @@
           .then((response) => {
             window.open(window.document.location.href = `https://favresume.herokuapp.com/${response.filename}`, '_blank')
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err)
+            this.snackbar = true
+            this.snackText = 'An error occur, try again!'
+            this.submitBtn = 'Submit & Generate'
+            this.researchs = false
+          });
       },
 
       addPersonalProject () {
          let obj = {
             "project_name": this.pName,
-            "tagline": `[${this.pTagline}(${this.pLink})]`,
+            "tagline": `[${this.pTagline}](${this.pLink})`,
             "description": [ this.pDescription ],
             "technology_used": {
               "tools": this.pTechUsed
